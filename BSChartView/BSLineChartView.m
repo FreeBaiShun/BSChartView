@@ -6,8 +6,6 @@
 
 #define kAnimationTime 1.5
 
-
-
 struct ValueRange {
     CGFloat minValue;
     CGFloat maxValue;
@@ -177,11 +175,15 @@ typedef struct ValueRange ValueRange;
     
     CGFloat originHeight = self.scrollView.frame.size.height / 5.0;
     
+    UIColor *colorText = [UIColor grayColor];
+    if (self.YTextColor) {
+        colorText = self.YTextColor;
+    }
     for (int i = 0; i < 5; i ++)
     {
         [self createTextLayerWith:CGRectMake(0, 0.5 * originHeight + originHeight * i - 7, self.originWidth, 14)
                            string:[NSString stringWithFormat:@"%.0f", max - orginaNum * i]
-                        textColor:[UIColor grayColor]
+                        textColor:colorText
                         alignment:kCAGravityCenter
                          fontSize:12
                        superLayer:self.layer];

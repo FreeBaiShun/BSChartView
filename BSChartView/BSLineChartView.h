@@ -30,6 +30,8 @@
 @property (assign, nonatomic) BOOL displayVerticalLine;
 /** Y轴刻度值自动适应值 （默认是0） */
 @property (assign, nonatomic) CGFloat YScaleAdapt;
+/** Y轴刻度文字颜色 */
+@property (strong, nonatomic) UIColor *YTextColor;
 
 
 /**

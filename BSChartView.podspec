@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = "BSChartView"
-s.version      = "0.0.3"
+s.version      = "0.0.4"
 s.summary      = "A short description of BSChartView."
 s.description  = <<-DESC
 折线图，柱状图，圆饼图工具

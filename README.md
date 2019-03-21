@@ -142,6 +142,7 @@ lineChartView = [[BSLineChartView alloc]initWithFrame:CGRectMake(0, 0, self.view
 //可选配置(要在dataSource之前配置才会生效)
 lineChartView.displayVerticalLine = NO;//显示竖线
 lineChartView.YScaleAdapt = 50;//y轴刻度值自动适应值是50（就是最大数据值+50，最小数据值-50）
+lineChartView.YTextColor = [UIColor orangeColor];//y轴刻度文字颜色
 
 lineChartView.dataSource = self;
 [self.view addSubview:lineChartView];
