@@ -6,6 +6,8 @@
 ![image](https://github.com/FreeBaiShun/BSChartView/blob/master/BSChartView.gif)     
 gitHub地址：https://github.com/FreeBaiShun/BSChartView
 
+# pod集成
+pod 'BSChartView'
 
 # 用法
 类似于tableView的使用
