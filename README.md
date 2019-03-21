@@ -3,7 +3,7 @@
 2. 支持双Y轴显示，支持左右滑动，支持自定义样式。
 
 # 效果
-![image](https://github.com/FreeBaiShun/BSChartView/blob/master/BSChartView.gif)
+![image](https://github.com/FreeBaiShun/BSChartView/blob/master/BSChartView.gif)     
 gitHub地址：https://github.com/FreeBaiShun/BSChartView
 
 
