@@ -129,12 +129,19 @@
     lineChartView.displayVerticalLine = NO;//显示竖线
     lineChartView.YScaleAdapt = 50;//y轴刻度值自动适应值是50（就是最大数据值+50，最小数据值-50）
     lineChartView.YTextColor = [UIColor orangeColor];//y轴刻度文字颜色
+    lineChartView.fontSize = @13;//字号
+    lineChartView.fontName = @"PingFangSC-Medium";//字体
+    lineChartView.isTextVague = YES;//文字虚化
 
     lineChartView.dataSource = self;
     [self.view addSubview:lineChartView];
     
 //圆饼图
     chartView = [[BSPieChartView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height/2-64, self.view.frame.size.width, self.view.frame.size.height/2-64)];
+    
+    //可选配置(要在dataSource之前配置才会生效)
+    chartView.isTextVague = YES;//文字虚化
+    
     chartView.dataSource = self;
     [self.view addSubview:chartView];
    

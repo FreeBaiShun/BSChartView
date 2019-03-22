@@ -23,6 +23,9 @@
 
 /** 能否点击 (默认不能) */
 @property (assign, nonatomic) BOOL *canTouch;
+/** 文字是否是模糊效果 (默认不模糊)*/
+@property (assign, nonatomic) BOOL isTextVague;
+
 /** 重新刷新数据(当数据源被重新赋值后调用此方法可以重新刷新数据) */
 - (void)refreshAllData;
 @end

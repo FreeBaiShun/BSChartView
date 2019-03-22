@@ -220,6 +220,9 @@
     textLayer.alignmentMode = kCAAlignmentCenter;
     textLayer.string = content;
     textLayer.wrapped = YES;
+    if (!self.isTextVague) {
+        textLayer.contentsScale = [UIScreen mainScreen].scale;
+    }
     if (arrMTags == nil) {
         arrMTags = [NSMutableArray array];
     }

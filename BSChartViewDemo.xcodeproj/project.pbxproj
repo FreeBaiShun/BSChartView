@@ -15,8 +15,8 @@
 		B09119502242162500D3051D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B091194F2242162500D3051D /* main.m */; };
 		B091195A2242162600D3051D /* BSChartViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B09119592242162600D3051D /* BSChartViewDemoTests.m */; };
 		B09119652242162600D3051D /* BSChartViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B09119642242162600D3051D /* BSChartViewDemoUITests.m */; };
-		B091197E22421E8700D3051D /* BSPirChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B091197B22421E8700D3051D /* BSPirChartView.m */; };
 		B091197F22421E8700D3051D /* BSLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B091197D22421E8700D3051D /* BSLineChartView.m */; };
+		B0B462FD22448FBC004B9418 /* BSPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B462FC22448FBC004B9418 /* BSPieChartView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,9 +54,9 @@
 		B09119642242162600D3051D /* BSChartViewDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BSChartViewDemoUITests.m; sourceTree = "<group>"; };
 		B09119662242162600D3051D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B091197A22421E8700D3051D /* BSLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSLineChartView.h; sourceTree = "<group>"; };
-		B091197B22421E8700D3051D /* BSPirChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPirChartView.m; sourceTree = "<group>"; };
 		B091197C22421E8700D3051D /* BSPieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPieChartView.h; sourceTree = "<group>"; };
 		B091197D22421E8700D3051D /* BSLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSLineChartView.m; sourceTree = "<group>"; };
+		B0B462FC22448FBC004B9418 /* BSPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPieChartView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,10 +142,10 @@
 		B091197922421E8700D3051D /* BSChartView */ = {
 			isa = PBXGroup;
 			children = (
+				B091197C22421E8700D3051D /* BSPieChartView.h */,
+				B0B462FC22448FBC004B9418 /* BSPieChartView.m */,
 				B091197A22421E8700D3051D /* BSLineChartView.h */,
 				B091197D22421E8700D3051D /* BSLineChartView.m */,
-				B091197C22421E8700D3051D /* BSPieChartView.h */,
-				B091197B22421E8700D3051D /* BSPirChartView.m */,
 			);
 			path = BSChartView;
 			sourceTree = SOURCE_ROOT;
@@ -280,8 +280,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B091197E22421E8700D3051D /* BSPirChartView.m in Sources */,
 				B09119452242162500D3051D /* ViewController.m in Sources */,
+				B0B462FD22448FBC004B9418 /* BSPieChartView.m in Sources */,
 				B091197F22421E8700D3051D /* BSLineChartView.m in Sources */,
 				B09119502242162500D3051D /* main.m in Sources */,
 				B09119422242162500D3051D /* AppDelegate.m in Sources */,

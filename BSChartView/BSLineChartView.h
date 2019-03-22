@@ -32,7 +32,12 @@
 @property (assign, nonatomic) CGFloat YScaleAdapt;
 /** Y轴刻度文字颜色 */
 @property (strong, nonatomic) UIColor *YTextColor;
-
+/** 文字是否是模糊效果 (默认不模糊)*/
+@property (assign, nonatomic) BOOL isTextVague;
+/** 文字字体 */
+@property (copy, nonatomic) NSString *fontName;
+/** 字号 (默认12号)*/
+@property (copy, nonatomic) NSNumber *fontSize;
 
 /**
  重新刷新数据(当数据源被重新赋值后调用此方法可以重新刷新数据)

@@ -149,13 +149,17 @@ typedef struct ValueRange ValueRange;
 
 - (void)drawBottomTitle
 {
+    int fontSize = 12;
+    if (self.fontSize) {
+        fontSize = self.fontSize.intValue;
+    }
     for (int i = 0; i < self.titleArray.count; i++)
     {
         [self createTextLayerWith:CGRectMake(self.originWidth * 0.5 + self.originWidth * i, self.scrollView.frame.size.height - 14, self.originWidth, 14)
                            string:self.titleArray[i]
                         textColor:[UIColor grayColor]
                         alignment:kCAGravityCenter
-                         fontSize:12
+                         fontSize:fontSize
                        superLayer:self.scrollView.layer];
     }
 }
@@ -179,13 +183,20 @@ typedef struct ValueRange ValueRange;
     if (self.YTextColor) {
         colorText = self.YTextColor;
     }
+    
+    int fontSize = 12;
+    if (self.fontSize) {
+        fontSize = self.fontSize.intValue;
+    }
+    
+    
     for (int i = 0; i < 5; i ++)
     {
         [self createTextLayerWith:CGRectMake(0, 0.5 * originHeight + originHeight * i - 7, self.originWidth, 14)
                            string:[NSString stringWithFormat:@"%.0f", max - orginaNum * i]
                         textColor:colorText
                         alignment:kCAGravityCenter
-                         fontSize:12
+                         fontSize:fontSize
                        superLayer:self.layer];
     }
     
@@ -335,7 +346,15 @@ typedef struct ValueRange ValueRange;
     textLayer.alignmentMode = alignment;
     textLayer.fontSize = fontSize;
     textLayer.string = string;
+    if (!self.isTextVague) {
+        textLayer.contentsScale = [UIScreen mainScreen].scale;
+    }
     [superLayer addSublayer:textLayer];
+    
+    if (self.fontName) {
+        textLayer.font = (__bridge CFTypeRef)self.fontName;
+    }
+
     return textLayer;
 }
 
