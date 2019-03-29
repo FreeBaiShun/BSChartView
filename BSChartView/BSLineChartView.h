@@ -38,6 +38,9 @@
 @property (copy, nonatomic) NSString *fontName;
 /** 字号 (默认12号)*/
 @property (copy, nonatomic) NSNumber *fontSize;
+/** Y轴刻度过大转换 (默认不转换, 可选值1000，10000)*/
+@property (strong, nonatomic) NSNumber *numSoMaxFlag;
+
 
 /**
  重新刷新数据(当数据源被重新赋值后调用此方法可以重新刷新数据)

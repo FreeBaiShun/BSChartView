@@ -103,22 +103,32 @@ typedef struct ValueRange ValueRange;
     CGFloat rightInsert = self.barValuesArray.count > 0 ? self.originWidth : 0;
     
     self.scrollView = ({
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(leftInsert, 0, self.frame.size.width - leftInsert - rightInsert, self.frame.size.height)];
+        UIScrollView *scrollView = _scrollView;
+        if (!_scrollView) {
+            scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(leftInsert, 0, self.frame.size.width - leftInsert - rightInsert, self.frame.size.height)];
+            [self addSubview:scrollView];
+        }
+        
         scrollView.showsHorizontalScrollIndicator = NO;
         scrollView.showsVerticalScrollIndicator = NO;
         scrollView.contentSize = CGSizeMake((self.titleArray.count + 1) * self.originWidth, self.scrollView.frame.size.height);
-        [self addSubview:scrollView];
+        scrollView.contentOffset = CGPointMake(0, 0);
         scrollView;
     });
     
-    [UIView animateWithDuration:kAnimationTime
-                     animations:^{
-                         self.scrollView.contentOffset = CGPointMake((self.titleArray.count + 1) * self.originWidth - self.scrollView.frame.size.width, 0);
-                     }];
+    CGFloat flagScroll = (self.titleArray.count + 1) * self.originWidth - self.scrollView.frame.size.width;
+    if (flagScroll > 0) {
+        [UIView animateWithDuration:kAnimationTime
+                         animations:^{
+                             self.scrollView.contentOffset = CGPointMake((self.titleArray.count + 1) * self.originWidth - self.scrollView.frame.size.width, 0);
+                         }];
+    }else{
+        self.scrollView.contentOffset = CGPointMake(0, 0);
+    }
+    
 }
 
 #pragma mark - HorizontalLine, VerticalLine, BottomTitle
-
 //画横线
 - (void)drawHorizontalLine
 {
@@ -130,7 +140,7 @@ typedef struct ValueRange ValueRange;
         [path moveToPoint:CGPointMake(self.originWidth * 0.5, i*originHeight + 0.5 * originHeight)];
         [path addLineToPoint:CGPointMake(self.originWidth * 0.5 + self.originWidth * self.titleArray.count, i*originHeight  + 0.5 * originHeight)];
     }
-    [self createLayerWith:path fillColor:[UIColor clearColor] strokeColor:[[UIColor blackColor]colorWithAlphaComponent:0.1] lineWidth:0.5 isData:NO];
+    [self createLayerWith:path fillColor:[UIColor clearColor] strokeColor:[[UIColor blackColor]colorWithAlphaComponent:0.1] lineWidth:0.5 isData:YES];
 }
 
 //画竖线
@@ -172,9 +182,15 @@ typedef struct ValueRange ValueRange;
         [yArray addObjectsFromArray:array];
     }
     
+    if (yArray.count == 0) {
+        return ;
+    }
     ValueRange range = [self getValueRangeWith:yArray];
     CGFloat max = range.maxValue + self.YScaleAdapt;
     CGFloat min = range.minValue - self.YScaleAdapt;
+    if (max == min) {
+        max = min + 4;
+    }
     CGFloat orginaNum = (max-min)/4;
     
     CGFloat originHeight = self.scrollView.frame.size.height / 5.0;
@@ -192,8 +208,22 @@ typedef struct ValueRange ValueRange;
     
     for (int i = 0; i < 5; i ++)
     {
+        CGFloat numCur = max - orginaNum * i;
+        NSString *strNumText = [NSString stringWithFormat:@"%.1f",numCur];
+        if (self.numSoMaxFlag) {
+            if (self.numSoMaxFlag.integerValue == 1000) {
+                if (numCur > 1000) {
+                    strNumText = [NSString stringWithFormat:@"%.1fk",numCur/1000.0];
+                }
+            }else if (self.numSoMaxFlag.integerValue == 10000){
+                if (numCur > 10000) {
+                     strNumText = [NSString stringWithFormat:@"%.1fw",numCur/10000.0];
+                }
+            }
+        }
+        
         [self createTextLayerWith:CGRectMake(0, 0.5 * originHeight + originHeight * i - 7, self.originWidth, 14)
-                           string:[NSString stringWithFormat:@"%.0f", max - orginaNum * i]
+                           string:strNumText
                         textColor:colorText
                         alignment:kCAGravityCenter
                          fontSize:fontSize
@@ -256,13 +286,26 @@ typedef struct ValueRange ValueRange;
     ValueRange range = [self getValueRangeWith:self.barValuesArray];
     CGFloat max = range.maxValue + self.YScaleAdapt;
     CGFloat min = range.minValue - self.YScaleAdapt;
+    if (max == min) {
+        max = min + 4;
+    }
     CGFloat orginaNum = (max-min)/4;
     
     CGFloat originHeight = self.scrollView.frame.size.height / 5;
     for (int i = 0; i < 5; i ++)
     {
+        CGFloat numCur = max - orginaNum * i;
+        NSString *strNumText = [NSString stringWithFormat:@"%.1f",numCur];
+        if (self.numSoMaxFlag) {
+            if (self.numSoMaxFlag.integerValue == 1000) {
+                strNumText = [NSString stringWithFormat:@"%.1fk",numCur/1000.0];
+            }else if (self.numSoMaxFlag.integerValue == 10000){
+                strNumText = [NSString stringWithFormat:@"%.1fw",numCur/10000.0];
+            }
+        }
+        
         [self createTextLayerWith:CGRectMake(self.frame.size.width - self.originWidth, 0.5 * originHeight + originHeight * i - 7, self.originWidth, 14)
-                           string:[NSString stringWithFormat:@"%.1f", max - orginaNum * i]
+                           string:strNumText
                         textColor:[UIColor grayColor]
                         alignment:kCAGravityCenter
                          fontSize:12
@@ -349,6 +392,12 @@ typedef struct ValueRange ValueRange;
     if (!self.isTextVague) {
         textLayer.contentsScale = [UIScreen mainScreen].scale;
     }
+    if (arrMTag == nil) {
+        arrMTag = [NSMutableArray array];
+    }
+    [arrMTag addObject:textLayer];
+    
+    
     [superLayer addSublayer:textLayer];
     
     if (self.fontName) {
@@ -381,11 +430,8 @@ typedef struct ValueRange ValueRange;
         obj = nil;
     }];
     arrMTag = nil;
-    [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     
-    [self initArray];
-    [self drawValueLineLayer];
-    [self drawValueBarLayer];
+    [self setDataSource:_dataSource];
 }
 @end
 
