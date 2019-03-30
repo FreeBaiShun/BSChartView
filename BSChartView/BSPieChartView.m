@@ -71,6 +71,9 @@
     for (int i = 0; i < dataArray.count; i++)
     {
         CGFloat percent = [[dataArray objectAtIndex:i] floatValue];
+        if (percent <= 0) {
+            continue ;
+        }
         
         endAngle = startAngle + percent * M_PI * 2;
         
